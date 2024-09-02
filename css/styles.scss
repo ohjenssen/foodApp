@@ -40,3 +40,20 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 #barcodeScanner {
     display: none;
 }
+
+// .customCard {
+//     display: flex;
+//     height: 200px;
+//     width: 320px;
+
+//     .imgContainer {
+//         width: 200px;
+//         overflow: hidden;
+        
+//         .productImg {
+//             object-fit: cover;
+//             height: 100%;
+//             width: 100%;
+//         }
+//     }
+// }
