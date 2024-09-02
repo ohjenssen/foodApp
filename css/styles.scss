@@ -25,3 +25,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 .barCode {
     background-color: green;
 }
+
+img {
+    max-width: 200px;
+}
