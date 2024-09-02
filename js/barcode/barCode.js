@@ -4,7 +4,7 @@ const video = document.querySelector('#video');
 const resultNode = document.querySelector('#result');
 const stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'environment'}});
 const barcodeDetector = new BarcodeDetector({
-    formats: ["qr_code", "code_128", "code_39"],
+    formats: ["qr_code", "code_128", "code_39", "ean_13"],
 });
 
 video.srcObject = stream;
@@ -17,6 +17,8 @@ async function scanBarcode() {
     const barcodes = await barcodeDetector.detect(video);
     if(barcodes.length > 0) {
         resultNode.innerText = `Stregkode fundet: ${barcodes[0].rawValue}`;
+        console.log(barcodes);
+        
         video.pause(); // Stop scanning
     } else {
         requestAnimationFrame(scanBarcode);
