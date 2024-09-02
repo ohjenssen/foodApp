@@ -26,6 +26,13 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     background-color: green;
 }
 
-img {
-    max-width: 200px;
+.searchContainer {
+    display: flex;
+}
+
+.cardContainer {
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

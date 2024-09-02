@@ -16,15 +16,19 @@
 <body>
     <div class="container">
 
-        <input type="text" id="search">
-        <button>Scan</button>
-
-        <div class="results">
-            
+        <h1>Stregkodescanner</h1>
+        <div class="searchContainer">
+            <form id="searchForm" class="">
+                <input type="text" id="search">
+            </form>
+            <button id="barcodeBtn">Scan</button>
         </div>
 
+            <div class="results row row-cols-auto justify-content-center g-4 mt-3">
+
+            </div>
+
         <div>
-            <h1>Stregkodescanner</h1>
             <video id="video" autoplay></video>
             <p id="result"></p>
         </div>
