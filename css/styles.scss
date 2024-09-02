@@ -36,3 +36,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     flex-direction: column;
     align-items: center;
 }
+
+#barcodeScanner {
+    display: none;
+}

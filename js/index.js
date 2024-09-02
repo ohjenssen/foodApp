@@ -4,9 +4,12 @@ let count = 0;
 const searchBar = document.querySelector('#search');
 const form = document.querySelector('#searchForm');
 const resultsContainer = document.querySelector('.results');
+const barcodeBtn = document.querySelector('#barcodeBtn');
+const barcodeScanner = document.querySelector('#barcodeScanner');
 
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    barcodeScanner.style.display = 'none';
     resultsContainer.innerHTML = '';
         if(searchBar.value.length < 3){
             return;
@@ -64,32 +67,67 @@ searchForm.addEventListener('submit', (e) => {
 
 // ----------------------------------------Barcode------------------------------------------------
 
-// import {BarcodeDetector} from "https://fastly.jsdelivr.net/npm/barcode-detector@2/dist/es/pure.min.js";
-	
-// const video = document.querySelector('#video');
-// const resultNode = document.querySelector('#result');
-// const stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'environment'}});
-// const barcodeDetector = new BarcodeDetector({
-//     formats: ["qr_code", "code_128", "code_39", "ean_13"],
-// });
+import {BarcodeDetector} from "https://fastly.jsdelivr.net/npm/barcode-detector@2/dist/es/pure.min.js";
 
-// video.srcObject = stream;
-// video.onloadedmetadata = () => {
-//     video.play();
-//     requestAnimationFrame(scanBarcode);
-// };
+async function searchWithBarCode(barcode) {
+    const url = 'https://dk.openfoodfacts.org/api/v0/product/' + barcode + '.json';
+    const response = await fetch(url);
+    const product = await response.json();
+    if(!product.product){
+        alert('Oops, prøv igen!')
+    }
+    console.log(product.product.image_front_small_url);
 
-// async function scanBarcode() {
-//     const barcodes = await barcodeDetector.detect(video);
-//     if(barcodes.length > 0) {
-//         resultNode.innerText = `Stregkode fundet: ${barcodes[0].rawValue}`;
-//         console.log(barcodes);
+    const card = document.createElement('div');
+    card.innerHTML = `
+        <img class="productImage" src="${product.product.image_front_small_url}" alt="...">
+        <p>${product.product.product_name}</p>
+        <p>Kcal: ${product.product.nutriments['energy-kcal_value_100g']}</p>
+        <p>Fedt: ${product.product.nutriments.fat_100g}</p>
+        <p>Kulhydrat: ${product.product.nutriments.carbohydrates_100g}</p>
+        <p>Sukker: ${product.product.nutriments.sugars_100g}</p>
+        <p>Proteiner: ${product.product.nutriments.proteins_100g}</p>
+        <p>Salt ${product.product.nutriments.salt_100g}</p>
+    `;
+    
+    resultsContainer.appendChild(card);
+}
+
+const video = document.querySelector('#video');
+const resultNode = document.querySelector('#result');
+const stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'environment'}});
+const barcodeDetector = new BarcodeDetector({
+    formats: ["qr_code", "code_128", "code_39", "ean_13"],
+});
+
+video.srcObject = stream;
+video.onloadedmetadata = () => {
+    video.play();
+    requestAnimationFrame(scanBarcode);
+};
+
+async function scanBarcode() {
+    let barcodes = await barcodeDetector.detect(video);
+    if(barcodes.length > 0) {
+        resultNode.innerText = `Stregkode fundet: ${barcodes[0].rawValue}`;
         
-//         video.pause(); // Stop scanning
-//     } else {
-//         requestAnimationFrame(scanBarcode);
-//     }
-// }
+        video.pause(); // Stop scanning
+        barcodeScanner.style.display = 'none';
+        searchWithBarCode(barcodes[0].rawValue);
+    } else {
+        requestAnimationFrame(scanBarcode);
+    }
+
+    video.play();
+    barcodes = '';
+}
+
+barcodeBtn.addEventListener('click', () => {
+    barcodeScanner.style.display = 'block';
+    resultsContainer.innerHTML = '';
+    scanBarcode();
+})
+	
 
 
 
