@@ -10,12 +10,13 @@ searchBar.addEventListener('input', () => {
     .then(json => {
 
         count = 0;
-        console.log(json);
         
         for(const product of json){
             if(count >= max){
                 return;
             }
+
+            console.log(product.product_name);
         }
     });
 
