@@ -34,24 +34,32 @@ searchForm.addEventListener('submit', (e) => {
                 count++;
                 const card = document.createElement('div');
                 card.innerHTML = `
-                      <img class="productImage" <img src="${product.image_front_small_url}" class="" alt="...">
-                      <p>${product.product_name}</p>
-                      <p>Kcal: ${product.nutriments['energy-kcal_value_100g']}</p>
-                      <p>Fedt: ${product.nutriments.fat_100g}</p>
-                      <p>Kulhydrat: ${product.nutriments.carbohydrates_100g}</p>
-                      <p>Sukker: ${product.nutriments.sugars_100g}</p>
-                      <p>Proteiner: ${product.nutriments.proteins_100g}</p>
-                      <p>Salt ${product.nutriments.salt_100g}</p>
+                            <div class="imgContainer">
+                                <img class="productImg" src="${product.image_front_small_url}">
+                            </div>
+                            <div class="productInfo">
+                                <h2>${product.product_name}</h2>
+                                <button class="seeMoreBtn">Se mer</button>
+                            </div>
                 `;
 
                 resultsContainer.append(card);
-                card.classList.add('cardContainer');
+                card.classList.add('customCard');
                 card.style.width = '18rem';
-                card.classList.add('m-1')
             }
         });
 
 })
+
+//-------------------------------- Old card component ----------------------------------------
+{/* <img class="productImage" <img src="${product.image_front_small_url}" class="" alt="...">
+<p>${product.product_name}</p>
+<p>Kcal: ${product.nutriments['energy-kcal_value_100g']}</p>
+<p>Fedt: ${product.nutriments.fat_100g}</p>
+<p>Kulhydrat: ${product.nutriments.carbohydrates_100g}</p>
+<p>Sukker: ${product.nutriments.sugars_100g}</p>
+<p>Proteiner: ${product.nutriments.proteins_100g}</p>
+<p>Salt ${product.nutriments.salt_100g}</p> */}
 
 // ----.---Kode med nutriscore --------
 // card.innerHTML = `

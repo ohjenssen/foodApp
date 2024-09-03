@@ -18,16 +18,39 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 @import "bootstrapComponents";
 
 // 5. Du kan lave styling her...
-.foodFacts {
-    background-color: red;
+.header {
+    background-color: white;
+    padding: 32px 64px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+    .title {
+        color: #008080;
+        text-align: center;
+        font-size: 16px;
+    }
 }
 
-.barCode {
-    background-color: green;
+#barcodeBtn {
+    background-color: #EFEFEF;
+    border: none;
+}
+
+.bg-gray {
+    background-color: #EFEFEF;
 }
 
 .searchContainer {
     display: flex;
+}
+
+#search {
+    background-color: #EFEFEF;
+    border: none;
+    width: 100%;
+}
+
+#search:focus {
+        outline: none;
 }
 
 .searchForm {
@@ -37,6 +60,9 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 .searchBar {
     width: 100%;
     border-radius: 20px;
+    border: none;
+    background-color: #EFEFEF;
+    padding: 8px 16px;
 }
 
 .cardContainer {
@@ -50,16 +76,22 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     display: none;
 }
 
+.searchResultsContainer {
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .customCard {
+    background-color: white;
     display: flex;
     flex-wrap: nowrap;
     height: 150px;
     width: 300px;
-    // background-color: #008080;
-    border: 1px solid black;
     margin: 16px;
     padding: 0px;
     border-radius: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
     h2 {
         font-size: 24px;
@@ -70,6 +102,15 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
         padding: 10px 20px;
         border: none;
         border-radius: 20px;
+        background-color: white;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        color: #008080;
+    }
+
+    .seeMoreBtn:hover {
+        background-color: #008080;
+        color: white;
+        transition: 0.2s;
     }
 
     .imgContainer {
@@ -91,4 +132,11 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
         align-items: center;
         justify-content: space-around;
     }
+}
+
+@media (min-width: 770px){
+    .searchResultsContainer {
+        justify-content: space-between;
+    }
+
 }

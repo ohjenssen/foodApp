@@ -13,18 +13,28 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
+<body class="bg-gray">
+        <header class="header">
+            <h1 class="title">ScanMaster</h1>
+            <div class="searchContainer searchBar">
+                <form id="searchForm" class="searchForm">
+                    <input type="text" id="search" placeholder="Find din vare">
+                </form>
+                <button id="barcodeBtn"><img class="scanIcon" src="./images/scanIcon.svg"></button>
+            </div>
+        </header>
+
     <div class="container">
 
-        <h1>ScanMaster</h1>
+        <!-- <h1>ScanMaster</h1>
         <div class="searchContainer">
             <form id="searchForm" class="searchForm">
                 <input type="text" id="search" class="searchBar">
             </form>
             <button id="barcodeBtn">Scan</button>
-        </div>
+        </div> -->
 
-        <div class="results row row-cols-auto justify-content-center g-4 mt-3">
+        <div class="results row row-cols-auto g-4 mt-3 searchResultsContainer">
 
         <!-- Custom card component -->
             <!-- <div class="customCard">
