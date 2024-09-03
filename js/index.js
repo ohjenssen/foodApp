@@ -18,6 +18,7 @@ searchForm.addEventListener('submit', (e) => {
         fetch(`https://dk.openfoodfacts.org/cgi/search.pl?search_terms=${searchBar.value}&search_simple=1&action=process&json=1`)
         .then(response => response.json())
         .then(json => {
+            console.log(json);
     
             count = 0;
             
