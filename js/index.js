@@ -82,12 +82,15 @@ searchForm.addEventListener('submit', (e) => {
 import {BarcodeDetector} from "https://fastly.jsdelivr.net/npm/barcode-detector@2/dist/es/pure.min.js";
 
 async function searchWithBarCode(barcode) {
+    video.pause(); // Stop scanning
     const url = 'https://dk.openfoodfacts.org/api/v0/product/' + barcode + '.json';
     const response = await fetch(url);
     const product = await response.json();
     loader.style.display = 'grid';
     if(!product.product){
         alert('Oops, prøv igen!')
+        loader.style.display = 'none';
+        return;
     }
 
     if(response.ok){
@@ -96,13 +99,12 @@ async function searchWithBarCode(barcode) {
 
     const card = document.createElement('div');
     card.innerHTML = `
-
-     <div class="imgContainer">
-                                <img class="productImg" src="${product.product.image_front_small_url}">
-                            </div>
-                            <div class="productInfo">
-                                <h2>${product.product.product_name}</h2>
-                                <button class="seeMoreBtn">Se mer</button>
+        <div class="imgContainer">
+            <img class="productImg" src="${product.product.image_front_small_url}">
+            </div>
+            <div class="productInfo">
+            <h2>${product.product.product_name}</h2>
+            <button class="seeMoreBtn">Se mer</button>
         </div>
     `;
     
@@ -129,7 +131,6 @@ async function scanBarcode() {
     if(barcodes.length > 0) {
         resultNode.innerText = `Stregkode fundet: ${barcodes[0].rawValue}`;
         resultsContainer.innerHTML = '';
-        video.pause(); // Stop scanning
         barcodeScanner.style.display = 'none';
         searchWithBarCode(barcodes[0].rawValue);
     } else {
@@ -148,16 +149,3 @@ barcodeBtn.addEventListener('click', () => {
     
     scanBarcode();
 })
-	
-
-
-
-// switch(path){
-//     case '/pages/barcode.html':
-//         console.log('barcode');
-//         break;
-
-//     case '/pages/foodFacts.html':
-//         console.log('Food facts');
-//         break;
-// }
