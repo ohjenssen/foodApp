@@ -30,6 +30,15 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     display: flex;
 }
 
+.searchForm {
+    width: 100%;
+}
+
+.searchBar {
+    width: 100%;
+    border-radius: 20px;
+}
+
 .cardContainer {
     background-color: gray;
     display: flex;
