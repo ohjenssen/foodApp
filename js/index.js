@@ -118,7 +118,7 @@ async function scanBarcode() {
     let barcodes = await barcodeDetector.detect(video);
     if(barcodes.length > 0) {
         resultNode.innerText = `Stregkode fundet: ${barcodes[0].rawValue}`;
-        
+        resultsContainer.innerHTML = '';
         video.pause(); // Stop scanning
         barcodeScanner.style.display = 'none';
         searchWithBarCode(barcodes[0].rawValue);
@@ -131,8 +131,11 @@ async function scanBarcode() {
 }
 
 barcodeBtn.addEventListener('click', () => {
-    barcodeScanner.style.display = 'block';
-    resultsContainer.innerHTML = '';
+    var barcodeScanner = document.getElementById('barcodeScanner');
+    barcodeScanner.style.display = 'flex';
+    barcodeScanner.style.justifyContent = 'center';
+    barcodeScanner.style.alignItems = 'center';
+    
     scanBarcode();
 })
 	

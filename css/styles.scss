@@ -65,6 +65,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     padding: 8px 16px;
 }
 
+
 .cardContainer {
     background-color: gray;
     display: flex;
@@ -72,9 +73,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     align-items: center;
 }
 
-#barcodeScanner {
-    display: none;
-}
+
 
 .searchResultsContainer {
     display: flex; 
@@ -134,9 +133,38 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     }
 }
 
+<<<<<<< HEAD
 @media (min-width: 770px){
     .searchResultsContainer {
         justify-content: space-between;
     }
 
 }
+=======
+
+#barcodeScanner {
+    display: none;
+}
+.video{
+    height: 45%;
+    width: 50%;
+    border: 8px solid #008080;
+    border-radius: 50px;
+    box-shadow: 
+    rgba(0, 128, 128, 1) 0px 0px 15px, 
+
+
+    inset rgba(0, 128, 128, 1) 0px 0px 100px;
+}
+.videoContainer {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(255, 255, 255, 0.5); /* Fallback */
+    backdrop-filter: blur(2px);
+}
+>>>>>>> bb7e1ac2f28561904198b3a68d1574a0548b7e99
