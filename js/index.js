@@ -6,9 +6,11 @@ const searchForm = document.querySelector('#searchForm');
 const resultsContainer = document.querySelector('.results');
 const barcodeBtn = document.querySelector('#barcodeBtn');
 const barcodeScanner = document.querySelector('#barcodeScanner');
+const loader = document.querySelector('.loader');
 
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    loader.style.display = 'grid';
     barcodeScanner.style.display = 'none';
     resultsContainer.innerHTML = '';
         if(searchBar.value.length < 3){
@@ -18,8 +20,9 @@ searchForm.addEventListener('submit', (e) => {
         fetch(`https://dk.openfoodfacts.org/cgi/search.pl?search_terms=${searchBar.value}&search_simple=1&action=process&json=1`)
         .then(response => response.json())
         .then(json => {
-            console.log(json);
-    
+            
+            loader.style.display = 'none';
+
             count = 0;
             
             for(const product of json.products){
@@ -82,24 +85,30 @@ async function searchWithBarCode(barcode) {
     const url = 'https://dk.openfoodfacts.org/api/v0/product/' + barcode + '.json';
     const response = await fetch(url);
     const product = await response.json();
+    loader.style.display = 'grid';
     if(!product.product){
         alert('Oops, prøv igen!')
     }
-    console.log(product.product.image_front_small_url);
+
+    if(response.ok){
+            loader.style.display = 'none';
+    }
 
     const card = document.createElement('div');
     card.innerHTML = `
-        <img class="productImage" src="${product.product.image_front_small_url}" alt="...">
-        <p>${product.product.product_name}</p>
-        <p>Kcal: ${product.product.nutriments['energy-kcal_value_100g']}</p>
-        <p>Fedt: ${product.product.nutriments.fat_100g}</p>
-        <p>Kulhydrat: ${product.product.nutriments.carbohydrates_100g}</p>
-        <p>Sukker: ${product.product.nutriments.sugars_100g}</p>
-        <p>Proteiner: ${product.product.nutriments.proteins_100g}</p>
-        <p>Salt ${product.product.nutriments.salt_100g}</p>
+
+     <div class="imgContainer">
+                                <img class="productImg" src="${product.product.image_front_small_url}">
+                            </div>
+                            <div class="productInfo">
+                                <h2>${product.product.product_name}</h2>
+                                <button class="seeMoreBtn">Se mer</button>
+        </div>
     `;
     
     resultsContainer.appendChild(card);
+    card.classList.add('customCard');
+    card.style.width = '18rem';
 }
 
 const video = document.querySelector('#video');
