@@ -216,3 +216,11 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     10%,70%  {background-size:100% 205%,var(--s,0) 100%}
     70%,100% {background-position: top,center}
   }
+
+  #videoCloseBtn{
+    margin-top: 10%;
+    border-radius: 50%;
+    width: 130px;
+    height: 20%;
+    border: none;
+  }

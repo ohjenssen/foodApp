@@ -6,7 +6,7 @@ const searchForm = document.querySelector('#searchForm');
 const resultsContainer = document.querySelector('.results');
 const barcodeBtn = document.querySelector('#barcodeBtn');
 const barcodeScanner = document.querySelector('#barcodeScanner');
-
+const videoCloseBtn = document.querySelector('#videoCloseBtn')
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
     barcodeScanner.style.display = 'none';
@@ -136,8 +136,17 @@ barcodeBtn.addEventListener('click', () => {
     barcodeScanner.style.display = 'flex';
     barcodeScanner.style.justifyContent = 'center';
     barcodeScanner.style.alignItems = 'center';
+    barcodeScanner.style.flexDirection = 'column';
     
     scanBarcode();
+})
+
+
+videoCloseBtn.addEventListener('click', () => {
+   
+    barcodeScanner.style.display = 'none';
+    video.pause();
+   
 })
 	
 
