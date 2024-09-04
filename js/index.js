@@ -85,11 +85,11 @@ searchForm.addEventListener('submit', (e) => {
 import {BarcodeDetector} from "https://fastly.jsdelivr.net/npm/barcode-detector@2/dist/es/pure.min.js";
 
 async function searchWithBarCode(barcode) {
+    loader.style.display = 'grid';
     video.pause(); // Stop scanning
     const url = 'https://dk.openfoodfacts.org/api/v0/product/' + barcode + '.json';
     const response = await fetch(url);
     const product = await response.json();
-    loader.style.display = 'grid';
     if(!product.product){
         loader.style.display = 'none';
         alert('Oops, prøv igen!')
