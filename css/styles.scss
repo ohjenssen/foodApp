@@ -137,8 +137,10 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     display: none;
 }
 .video{
-    height: 45%;
-    width: 50%;
+    // height: 45%;
+    // width: 50%;
+    height: 280px;
+    max-width: 370px;
     border: 8px solid #008080;
     border-radius: 50px;
     box-shadow: 
@@ -159,7 +161,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     backdrop-filter: blur(2px);
 }
 
-/* HTML: <div class="loader"></div> */
+/* --------------------------------------------- Loader --------------------------------------------- */
 .loader {
     --c1:#673b14;
     --c2:#008080;
