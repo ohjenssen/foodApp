@@ -1,4 +1,4 @@
-import { seeMore } from "./functions/seeMore.js";
+import { createSeeMoreBtn } from "./functions/createSeeMore.js";
 let max = 20;
 let count = 0;
 const searchBar = document.querySelector('#search');
@@ -39,10 +39,6 @@ searchForm.addEventListener('submit', (e) => {
     
                 count++;
                 const card = document.createElement('div');
-                const seeMoreBtn = document.createElement('button');
-                seeMoreBtn.className = 'seeMoreBtn';
-                seeMoreBtn.textContent = 'Se mer';
-                seeMoreBtn.dataset.productId = product.id;
 
                 card.innerHTML = `
                     <div class="imgContainer">
@@ -53,14 +49,7 @@ searchForm.addEventListener('submit', (e) => {
                     </div>
                 `;
 
-                const productInfoDiv = card.querySelector('.productInfo');
-                productInfoDiv.appendChild(seeMoreBtn);
-
-                seeMoreBtn.addEventListener('click', async () => {
-                    seeMore(product);
-                });
-
-
+                createSeeMoreBtn(product, card);
                 resultsContainer.append(card);
                 card.classList.add('customCard');
                 card.style.width = '18rem';
@@ -102,8 +91,8 @@ async function searchWithBarCode(barcode) {
     const product = await response.json();
     loader.style.display = 'grid';
     if(!product.product){
-        alert('Oops, prøv igen!')
         loader.style.display = 'none';
+        alert('Oops, prøv igen!')
         return;
     }
 
@@ -113,16 +102,17 @@ async function searchWithBarCode(barcode) {
 
     console.log(product.product)
     const card = document.createElement('div');
+
     card.innerHTML = `
         <div class="imgContainer">
             <img class="productImg" src="${product.product.image_front_small_url}">
             </div>
             <div class="productInfo">
             <h2>${product.product.product_name}</h2>
-            <button class="seeMoreBtn">Se mer</button>
         </div>
     `;
     
+    createSeeMoreBtn(product.product, card);
     resultsContainer.appendChild(card);
     card.classList.add('customCard');
     card.style.width = '18rem';
