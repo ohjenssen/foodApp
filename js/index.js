@@ -159,7 +159,7 @@ video.onloadedmetadata = () => {
 async function scanBarcode() {
     let barcodes = await barcodeDetector.detect(video);
     if(barcodes.length > 0) {
-        resultNode.innerText = `Stregkode fundet: ${barcodes[0].rawValue}`;
+        // resultNode.innerText = `Stregkode fundet: ${barcodes[0].rawValue}`;
         resultsContainer.innerHTML = '';
         barcodeScanner.style.display = 'none';
         searchWithBarCode(barcodes[0].rawValue);
