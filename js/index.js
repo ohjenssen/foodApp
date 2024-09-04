@@ -15,27 +15,36 @@ const searchResultsTitle = document.querySelector('.searchResultsHeader');
 
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    if(searchBar.value.length < 2){
+        welcomeMessage.textContent = 'Obs, prøv med mer enn en bogstav';
+        return;
+    }
+
     welcomeMessage.textContent = 'Søger...';
     loader.style.display = 'grid';
-    barcodeScanner.style.display = 'none';
     resultsContainer.innerHTML = '';
-        if(searchBar.value.length < 3){
-            return;
-        }
         
-        fetch(`https://dk.openfoodfacts.org/cgi/search.pl?search_terms=${searchBar.value}&search_simple=1&action=process&json=1`)
-        .then(response => {
-            if(response.ok){
-                loader.style.display = 'none';
-                return response.json();
-            } else if(!response.ok){
-                loader.style.display = 'none';
-            }
-        })
-        .then(json => {
-            // loader.style.display = 'none';
-            count = 0;
-            
+    fetch(`https://dk.openfoodfacts.org/cgi/search.pl?search_terms=${searchBar.value}&search_simple=1&action=process&json=1`)
+    .then(response => {
+        if(response.ok){
+            loader.style.display = 'none';
+            return response.json();
+        } else if(!response.ok){
+            loader.style.display = 'none';
+            console.log(response);
+        }
+    })
+    .then(json => {
+        count = 0;
+
+        if(json.products.length === 0){
+            console.log(json.products);
+            welcomeMessage.style.display = 'block';
+            welcomeMessage.textContent = 'Ingen resultater';
+            searchResultsTitle.style.display = 'none';
+            return;
+
+        } else {
             for(const product of json.products){
                 if(count >= max){
                     return;
@@ -46,7 +55,6 @@ searchForm.addEventListener('submit', (e) => {
     
                 count++;
                 const card = document.createElement('div');
-
                 card.innerHTML = `
                     <div class="imgContainer">
                         <img class="productImg" src="${product.image_front_small_url}">
@@ -55,7 +63,7 @@ searchForm.addEventListener('submit', (e) => {
                         <h2>${product.product_name}</h2>
                     </div>
                 `;
-
+    
                 createSeeMoreBtn(product, card);
                 resultsContainer.append(card);
                 card.classList.add('customCard');
@@ -63,7 +71,9 @@ searchForm.addEventListener('submit', (e) => {
                 welcomeMessage.style.display = 'none';
                 searchResultsTitle.style.display = 'block';
             }
-        });
+        }
+        
+    });
 
 })
 
@@ -111,9 +121,7 @@ async function searchWithBarCode(barcode) {
             loader.style.display = 'none';
     };
 
-    console.log(product.product)
     const card = document.createElement('div');
-
     card.innerHTML = `
         <div class="imgContainer">
             <img class="productImg" src="${product.product.image_front_small_url}">
