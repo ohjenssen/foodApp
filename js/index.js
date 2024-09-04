@@ -138,10 +138,12 @@ const barcodeDetector = new BarcodeDetector({
 });
 
 video.srcObject = stream;
-video.onloadedmetadata = () => {
-    video.play();
-    requestAnimationFrame(scanBarcode);
-};
+// Kommentert ut, scanneren fungerer stadig, spurte chat som mente at det... 
+// ...fint kan slettes fordi vi kaller scanBarcode i eventlistener 
+// video.onloadedmetadata = () => {
+//     video.play();
+//     requestAnimationFrame(scanBarcode);
+// };
 
 async function scanBarcode() {
     let barcodes = await barcodeDetector.detect(video);

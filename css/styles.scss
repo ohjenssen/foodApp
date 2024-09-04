@@ -1,6 +1,6 @@
 // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
 @import "../node_modules/bootstrap/scss/functions";
-
+@import "./partials/dotLoader";
 // 2. Include any default variable overrides here
 $link-decoration: none;
 
@@ -176,9 +176,9 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     position: absolute;
     top: 50%;
     right: 50%;
-  }
-  .loader::before,
-  .loader::after {
+}
+.loader::before,
+.loader::after {
     content: "";
     grid-area: 1/1;
     width: 75%;
@@ -199,30 +199,30 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     background-repeat: no-repeat;
     animation: inherit;
     animation-name: l5-1;
-  }
-  .loader::after {
+}
+.loader::after {
     transform-origin: 50% calc(100% + 2px);
     transform: scaleY(-1);
     --s:3px;
     --d:180deg;
-  }
-  @keyframes l5-0 {
+}
+@keyframes l5-0 {
     80%  {transform: rotate(0)}
     100% {transform: rotate(0.5turn)}
-  }
-  @keyframes l5-1 {
+}
+@keyframes l5-1 {
     10%,70%  {background-size:100% 205%,var(--s,0) 100%}
     70%,100% {background-position: top,center}
-  }
+}
 
 
-  #videoCloseBtn{
+#videoCloseBtn{
     margin-top: 10%;
     border-radius: 50%;
     width: 130px;
     height: 130px;
     border: none;
-  }
+}
 
 @media (min-width: 770px){
     .searchResultsContainer {

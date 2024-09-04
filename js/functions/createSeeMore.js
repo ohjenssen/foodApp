@@ -8,8 +8,10 @@ export async function createSeeMoreBtn(product, card){
     productInfoDiv.appendChild(seeMoreBtn);
 
     seeMoreBtn.addEventListener('click', async () => {
+        seeMoreBtn.innerHTML = `<div class="dotLoader"></div>`;
         const response = await fetch(`https://dk.openfoodfacts.org/api/v0/product/${product.id}.json`);
         const productData = await response.json();
+        seeMoreBtn.innerHTML = `Se mer`;
 
         const modalTitle = document.querySelector('#productModal .modal-title');
         const modalBody = document.querySelector('#productModal .modal-body');
