@@ -129,7 +129,6 @@ async function searchWithBarCode(barcode) {
 }
 
 const video = document.querySelector('#video');
-const resultNode = document.querySelector('#result');
 const stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'environment'}});
 const barcodeDetector = new BarcodeDetector({
     formats: ["qr_code", "code_128", "code_39", "ean_13"],
@@ -144,7 +143,6 @@ video.onloadedmetadata = () => {
 async function scanBarcode() {
     let barcodes = await barcodeDetector.detect(video);
     if(barcodes.length > 0) {
-        // resultNode.innerText = `Stregkode fundet: ${barcodes[0].rawValue}`;
         resultsContainer.innerHTML = '';
         barcodeScanner.style.display = 'none';
         searchWithBarCode(barcodes[0].rawValue);
