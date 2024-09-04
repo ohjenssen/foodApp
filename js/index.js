@@ -77,27 +77,6 @@ searchForm.addEventListener('submit', (e) => {
 
 })
 
-//-------------------------------- Old card component ----------------------------------------
-{/* <img class="productImage" <img src="${product.image_front_small_url}" class="" alt="...">
-<p>${product.product_name}</p>
-<p>Kcal: ${product.nutriments['energy-kcal_value_100g']}</p>
-<p>Fedt: ${product.nutriments.fat_100g}</p>
-<p>Kulhydrat: ${product.nutriments.carbohydrates_100g}</p>
-<p>Sukker: ${product.nutriments.sugars_100g}</p>
-<p>Proteiner: ${product.nutriments.proteins_100g}</p>
-<p>Salt ${product.nutriments.salt_100g}</p> */}
-
-// ----.---Kode med nutriscore --------
-// card.innerHTML = `
-// <img class="productImage" <img src="${product.image_front_small_url}" class="" alt="...">
-// <p>${product.product_name}</p>
-// <p>Kcal: ${product.nutriscore_data.energy}</p>
-// <p>Fedt: ${product.nutriscore_data.saturated_fat}</p>
-// <p>Kulhydrat: ${product.nutriscore_data.sugars}</p>
-// <p>Sukker: ${product.nutriscore_data.sugars}</p>
-// <p>Proteiner: ${product.nutriscore_data.proteins}</p>
-// <p>Salt ${product.nutriscore_data.sodium}</p>
-// `;
 
 // ----------------------------------------Barcode------------------------------------------------
 
@@ -146,12 +125,6 @@ const barcodeDetector = new BarcodeDetector({
 });
 
 video.srcObject = stream;
-// Kommentert ut, scanneren fungerer stadig, spurte chat som mente at det... 
-// ...fint kan slettes fordi vi kaller scanBarcode i eventlistener 
-// video.onloadedmetadata = () => {
-//     video.play();
-//     requestAnimationFrame(scanBarcode);
-// };
 
 async function scanBarcode() {
     let barcodes = await barcodeDetector.detect(video);
