@@ -8,7 +8,8 @@ const barcodeBtn = document.querySelector('#barcodeBtn');
 const barcodeScanner = document.querySelector('#barcodeScanner');
 const videoCloseBtn = document.querySelector('#videoCloseBtn')
 const loader = document.querySelector('.loader');
-
+const welcomeMessage = document.querySelector('.welcomeMessage');
+const searchResultsTitle = document.querySelector('.searchResultsHeader');
 
 
 
@@ -24,7 +25,7 @@ searchForm.addEventListener('submit', (e) => {
         fetch(`https://dk.openfoodfacts.org/cgi/search.pl?search_terms=${searchBar.value}&search_simple=1&action=process&json=1`)
         .then(response => response.json())
         .then(json => {
-            
+            welcomeMessage.textContent = 'Søger...';
             loader.style.display = 'none';
 
             count = 0;
@@ -53,6 +54,8 @@ searchForm.addEventListener('submit', (e) => {
                 resultsContainer.append(card);
                 card.classList.add('customCard');
                 card.style.width = '18rem';
+                welcomeMessage.style.display = 'none';
+                searchResultsTitle.style.display = 'block';
             }
         });
 
@@ -90,6 +93,8 @@ async function searchWithBarCode(barcode) {
     const url = 'https://dk.openfoodfacts.org/api/v0/product/' + barcode + '.json';
     const response = await fetch(url);
     const product = await response.json();
+    welcomeMessage.textContent = 'Søger...';
+
     if(!product.product){
         loader.style.display = 'none';
         alert('Oops, prøv igen!')
@@ -116,6 +121,8 @@ async function searchWithBarCode(barcode) {
     resultsContainer.appendChild(card);
     card.classList.add('customCard');
     card.style.width = '18rem';
+    welcomeMessage.style.display = 'none';
+    searchResultsTitle.style.display = 'block';
 }
 
 const video = document.querySelector('#video');
