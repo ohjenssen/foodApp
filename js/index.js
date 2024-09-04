@@ -15,6 +15,7 @@ const searchResultsTitle = document.querySelector('.searchResultsHeader');
 
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    welcomeMessage.textContent = 'Søger...';
     loader.style.display = 'grid';
     barcodeScanner.style.display = 'none';
     resultsContainer.innerHTML = '';
@@ -23,11 +24,16 @@ searchForm.addEventListener('submit', (e) => {
         }
         
         fetch(`https://dk.openfoodfacts.org/cgi/search.pl?search_terms=${searchBar.value}&search_simple=1&action=process&json=1`)
-        .then(response => response.json())
+        .then(response => {
+            if(response.ok){
+                loader.style.display = 'none';
+                return response.json();
+            } else if(!response.ok){
+                loader.style.display = 'none';
+            }
+        })
         .then(json => {
-            welcomeMessage.textContent = 'Søger...';
-            loader.style.display = 'none';
-
+            // loader.style.display = 'none';
             count = 0;
             
             for(const product of json.products){
@@ -99,11 +105,11 @@ async function searchWithBarCode(barcode) {
         loader.style.display = 'none';
         alert('Oops, prøv igen!')
         return;
-    }
+    };
 
     if(response.ok){
             loader.style.display = 'none';
-    }
+    };
 
     console.log(product.product)
     const card = document.createElement('div');
@@ -123,7 +129,7 @@ async function searchWithBarCode(barcode) {
     card.style.width = '18rem';
     welcomeMessage.style.display = 'none';
     searchResultsTitle.style.display = 'block';
-}
+};
 
 const video = document.querySelector('#video');
 const stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'environment'}});
@@ -145,11 +151,11 @@ async function scanBarcode() {
         searchWithBarCode(barcodes[0].rawValue);
     } else {
         requestAnimationFrame(scanBarcode);
-    }
+    };
 
     video.play();
     barcodes = '';
-}
+};
 
 barcodeBtn.addEventListener('click', () => {
     var barcodeScanner = document.getElementById('barcodeScanner');
@@ -160,7 +166,7 @@ barcodeBtn.addEventListener('click', () => {
     
     scanBarcode();
 
-})
+});
 
 
 videoCloseBtn.addEventListener('click', () => {
@@ -168,6 +174,4 @@ videoCloseBtn.addEventListener('click', () => {
     barcodeScanner.style.display = 'none';
     video.pause();
    
-})
-	
-
+});
