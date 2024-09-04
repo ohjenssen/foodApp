@@ -1,4 +1,4 @@
-const path = location.pathname;
+import { seeMore } from "./functions/seeMore.js";
 let max = 20;
 let count = 0;
 const searchBar = document.querySelector('#search');
@@ -6,10 +6,10 @@ const searchForm = document.querySelector('#searchForm');
 const resultsContainer = document.querySelector('.results');
 const barcodeBtn = document.querySelector('#barcodeBtn');
 const barcodeScanner = document.querySelector('#barcodeScanner');
-
 const videoCloseBtn = document.querySelector('#videoCloseBtn')
-
 const loader = document.querySelector('.loader');
+
+
 
 
 searchForm.addEventListener('submit', (e) => {
@@ -36,20 +36,45 @@ searchForm.addEventListener('submit', (e) => {
                 if(!product.product_name || !product.image_front_small_url ){
                     continue;
                 }
-
-                console.log(product);
     
                 count++;
                 const card = document.createElement('div');
+                const seeMoreBtn = document.createElement('button');
+                seeMoreBtn.className = 'seeMoreBtn';
+                seeMoreBtn.textContent = 'Se mer';
+                seeMoreBtn.dataset.productId = product.id;
+
                 card.innerHTML = `
-                            <div class="imgContainer">
-                                <img class="productImg" src="${product.image_front_small_url}">
-                            </div>
-                            <div class="productInfo">
-                                <h2>${product.product_name}</h2>
-                                <button class="seeMoreBtn">Se mer</button>
-                            </div>
+                    <div class="imgContainer">
+                        <img class="productImg" src="${product.image_front_small_url}">
+                    </div>
+                    <div class="productInfo">
+                        <h2>${product.product_name}</h2>
+                    </div>
                 `;
+
+                const productInfoDiv = card.querySelector('.productInfo');
+                productInfoDiv.appendChild(seeMoreBtn);
+
+                seeMoreBtn.addEventListener('click', async () => {
+                    seeMore(product);
+                    // const response = await fetch(`https://dk.openfoodfacts.org/api/v0/product/${product.id}.json`);
+                    // const productData = await response.json();
+
+                    // const modalTitle = document.querySelector('#productModal .modal-title');
+                    // const modalBody = document.querySelector('#productModal .modal-body');
+
+                    // modalTitle.textContent = productData.product.product_name;
+                    // modalBody.innerHTML = `
+                    //     <p>Brand: ${productData.product.brands}</p>
+                    //     <p>Ingredients: ${productData.product.ingredients_text || 'No ingredients listed.'}</p>
+                    //     <img src="${productData.product.image_front_url}" alt="${productData.product.product_name}" class="img-fluid">
+                    // `;
+
+                    // const productModal = new bootstrap.Modal(document.getElementById('productModal'));
+                    // productModal.show();
+                });
+
 
                 resultsContainer.append(card);
                 card.classList.add('customCard');
@@ -101,6 +126,7 @@ async function searchWithBarCode(barcode) {
             loader.style.display = 'none';
     }
 
+    console.log(product.product)
     const card = document.createElement('div');
     card.innerHTML = `
         <div class="imgContainer">
@@ -164,15 +190,4 @@ videoCloseBtn.addEventListener('click', () => {
    
 })
 	
-
-
-
-// switch(path){
-//     case '/pages/barcode.html':
-//         console.log('barcode');
-//         break;
-
-//     case '/pages/foodFacts.html':
-//         console.log('Food facts');
-//         break;
 
