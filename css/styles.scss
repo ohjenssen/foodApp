@@ -161,6 +161,32 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     backdrop-filter: blur(2px);
 }
 
+.customModal {
+    display: flex;
+    align-items: center;
+
+    .modalImgContainer {
+        width: 200px;
+        overflow: hidden;
+        border-radius: 0px 0px 0px 5px;
+
+        .modalImg {
+            object-fit: contain;
+            width: 100%;
+            border-radius: 20px;
+        }
+    }
+
+    .nutriments {
+        display: flex;
+        justify-content: space-between;
+        padding: 16px;
+        width: 100%;
+        font-weight: 600;
+
+    }
+}
+
 /* --------------------------------------------- Loader --------------------------------------------- */
 .loader {
     --c1:#673b14;

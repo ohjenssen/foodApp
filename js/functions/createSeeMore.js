@@ -13,14 +13,34 @@ export async function createSeeMoreBtn(product, card){
         const productData = await response.json();
         seeMoreBtn.innerHTML = `Se mer`;
 
+        console.log(productData.product);
         const modalTitle = document.querySelector('#productModal .modal-title');
         const modalBody = document.querySelector('#productModal .modal-body');
 
         modalTitle.textContent = productData.product.product_name;
+
         modalBody.innerHTML = `
-            <p>Brand: ${productData.product.brands}</p>
-            <p>Ingredients: ${productData.product.ingredients_text || 'No ingredients listed.'}</p>
-            <img src="${productData.product.image_front_url}" alt="${productData.product.product_name}" class="img-fluid">
+            <div class="modalImgContainer">
+                <img src="${productData.product.image_front_url}" alt="${productData.product.product_name}" class="modalImg">
+            </div>
+            <div class="nutriments">
+                <div class="nutrimentCategories">
+                    <p>Kcal:</p>
+                    <p>Fedt:</p>
+                    <p>Kulhydrat:</p>
+                    <p>Sukker:</p>
+                    <p>Proteiner:</p>
+                    <p>Salt: </p>
+                </div>
+                <div class="nutrimentValues">
+                    <p>${productData.product.nutriscore_data.energy}</p>
+                    <p>${productData.product.nutriscore_data.saturated_fat}</p>
+                    <p>${productData.product.nutriscore_data.sugars}</p>
+                    <p>${productData.product.nutriscore_data.sugars}</p>
+                    <p>${productData.product.nutriscore_data.proteins}</p>
+                    <p>${productData.product.nutriscore_data.sodium}</p>
+                </div>
+            </div>
         `;
 
         const productModal = new bootstrap.Modal(document.getElementById('productModal'));
