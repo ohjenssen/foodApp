@@ -18,7 +18,7 @@ export async function createSeeMoreBtn(product, card){
 
           modalBody.innerHTML = `
             <div class="modalImgContainer">
-                <img src="${product.image_front_url}" alt="${product.product_name}" class="modalImg">
+                <img src="${product.image_front_url ? product.image_front_url : './images/No-Image-Placeholder.png'}" alt="${product.product_name}" class="modalImg">
             </div>
             <div class="nutriments">
                 <div class="nutrimentCategories">

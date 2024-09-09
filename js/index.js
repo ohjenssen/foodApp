@@ -49,8 +49,12 @@ searchForm.addEventListener('submit', (e) => {
                 if(count >= max){
                     return;
                 }
-                if(!product.product_name || !product.image_front_small_url ){
+                if(!product.product_name){ // || !product.image_front_small_url 
                     continue;
+                }
+
+                if(!product.image_front_small_url){
+                    product.image_front_small_url = './images/No-Image-Placeholder.png';
                 }
     
                 count++;
@@ -92,7 +96,8 @@ async function searchWithBarCode(barcode) {
 
     if(!product.product){
         loader.style.display = 'none';
-        alert('Oops, prøv igen!')
+        alert('Oops, prøv igen!');
+        welcomeMessage.textContent = 'Prøv igen!';
         return;
     };
 
