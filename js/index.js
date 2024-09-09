@@ -105,13 +105,15 @@ async function searchWithBarCode(barcode) {
             loader.style.display = 'none';
     };
 
+    console.log(product.product)
+
     const card = document.createElement('div');
     card.innerHTML = `
         <div class="imgContainer">
             <img class="productImg" src="${product.product.image_front_small_url}">
             </div>
             <div class="productInfo">
-            <h2>${product.product.product_name}</h2>
+            <h2>${product.product.product_name ? product.product.product_name : product.product.product_name_da}</h2>
         </div>
     `;
     
