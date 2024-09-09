@@ -1,8 +1,2 @@
-# Kickstarter
-
-Download projektet som ZIP-fil
-
-- Åben projektet og kør kommandoen "npm install" i terminalen
-- Kør "sass" kommandoen fra npm scripts.
-
-Du kan find npm scripts ved at dobbeltrykke på shift, på dit tastatur og søge. Alternativt kan du skrive "npm run sass" i terminalen
+ScanMaster
+Mads og Oskars projekt handler om en app, der ved hjælp af en scanner kan læse stregkoder på madprodukter og vise deres indhold. Appen giver brugeren information om ingredienser, næringsindhold og allergener, hvilket gør det nemmere at træffe sunde valg og undgå uønskede stoffer.
