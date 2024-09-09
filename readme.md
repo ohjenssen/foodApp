@@ -1,2 +1,2 @@
-ScanMaster
-Mads og Oskars projekt handler om en app, der ved hjælp af en scanner kan læse stregkoder på madprodukter og vise deres indhold. Appen giver brugeren information om ingredienser, næringsindhold og allergener, hvilket gør det nemmere at træffe sunde valg og undgå uønskede stoffer.
+ScanMaster er
+Mads og Oskars projekt der handler om en app, der ved hjælp af en scanner kan læse stregkoder på madprodukter og vise deres indhold. Appen giver brugeren information om ingredienser, næringsindhold og allergener, hvilket gør det nemmere at træffe sunde valg og undgå uønskede stoffer.
